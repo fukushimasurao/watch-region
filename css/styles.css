@@ -66,3 +66,9 @@ button:hover {
     background-color: #357ABD;
     /* 暗いブルー */
 }
+.note {
+    font-size: 10px;
+    color: #ff0000;
+    margin-top: 10px;
+    border-radius: 4px;
+}
