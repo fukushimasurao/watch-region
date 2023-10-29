@@ -1,22 +1,41 @@
-const searchString = "ap-northeast-1";
+const REGIONS = {
+  TOKYO: "ap-northeast-1",
+  VIRGINIA: "us-east-1",
+  OHIO: "us-east-2",
+  CALIFORNIA: "us-west-1",
+  OREGON: "us-west-2",
+};
+
 const currentURL = window.location.href;
-const isContained = currentURL.includes(searchString);
 
-let color = "";
-if (isContained) {
-  color = "red";
-} else {
-  color = "blue";
+function findMatchingRegion(url) {
+  for (let regionName in REGIONS) {
+    if (url.includes(REGIONS[regionName])) {
+      return regionName;
+    }
+  }
+  return null;
 }
+const matchedRegion = findMatchingRegion(currentURL);
+chrome.storage.local.get(
+  [
+    "TOKYO_COLOR",
+    "VIRGINIA_COLOR",
+    "OHIO_COLOR",
+    "CALIFORNIA_COLOR",
+    "OREGON_COLOR",
+  ],
+  function (result) {
+    if (matchedRegion) {
+      let colorKey = `${matchedRegion}_color`.toUpperCase();
+      if (result[colorKey]) {
+        const container = document.getElementById("h");
+        const newDiv = document.createElement("div");
 
-const container = document.getElementById("h");
-const newDiv = document.createElement("div");
-
-newDiv.style.height = "5px";
-newDiv.style.backgroundColor = color;
-container.parentNode.insertBefore(newDiv, container);
-
-let element = document.querySelector(
-  ".awsui_drawer-content_1uo6m_1i9ii_122.awsui_drawer-content-clickable_1uo6m_1i9ii_137.awsui_tools_1fj9k_1uvk8_33"
+        newDiv.style.height = "5px";
+        newDiv.style.backgroundColor = result[colorKey];
+        container.parentNode.insertBefore(newDiv, container);
+      }
+    }
+  }
 );
-console.log(element);

@@ -4,7 +4,7 @@
   "manifest_version": 3,
   "author": "nu0640042@gmail.com",
 
-  "description": "FOR JAPANESE ONLY. AWSのリージョンを監視する拡張機能ですよ",
+  "description": "FOR JAPANESE ONLY. AWSのリージョンを監視する拡張機能です",
   "permissions": ["storage"],
   "action": {
     "default_popup": "popup.html"
