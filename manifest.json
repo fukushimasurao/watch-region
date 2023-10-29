@@ -2,11 +2,17 @@
   "name": "watch_region!!",
   "version": "1.0.0",
   "manifest_version": 3,
+  "author": "nu0640042@gmail.com",
+
   "description": "FOR JAPANESE ONLY. AWSのリージョンを監視する拡張機能ですよ",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html"
+  },
   "content_scripts": [
     {
       "matches": ["https://*.aws.amazon.com/*"],
-      "js": ["content.js"],
+      "js": ["js/content.js"],
       "run_at": "document_end",
       "all_frames": true
     }
